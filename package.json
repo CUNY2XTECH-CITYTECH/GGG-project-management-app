@@ -1,0 +1,24 @@
+{
+  "dependencies": {
+    "pg": "^8.13.1"
+  },
+  "name": "ggg-project-management-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CUNY2XTECH-CITYTECH/GGG-project-management-app.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CUNY2XTECH-CITYTECH/GGG-project-management-app/issues"
+  },
+  "homepage": "https://github.com/CUNY2XTECH-CITYTECH/GGG-project-management-app#readme"
+}
