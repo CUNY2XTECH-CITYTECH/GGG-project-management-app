@@ -23,6 +23,6 @@
       }
     ]
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "../my-project-management-app/src/components/Banner.tsx", "../my-project-management-app/src/components/CallToAction.tsx", "../my-project-management-app/src/components/FAQs.tsx", "../my-project-management-app/src/components/Feature.tsx", "../my-project-management-app/src/components/Features.tsx", "../my-project-management-app/src/components/Footer.tsx", "../my-project-management-app/src/components/Hero.tsx", "../my-project-management-app/src/components/LogoTicker.tsx", "../my-project-management-app/src/components/Navbar.tsx", "../my-project-management-app/src/components/ProductShowcase.tsx"],
   "exclude": ["node_modules"]
 }

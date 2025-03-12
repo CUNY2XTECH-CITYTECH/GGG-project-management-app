@@ -1,0 +1,47 @@
+.
+├── app
+│   ├── api
+│   │   ├── invite-user
+│   │   └── new-project
+│   ├── layout.tsx
+│   ├── new-project
+│   ├── page.tsx
+│   ├── project
+│   │   └── page.tsx
+│   └── styles
+├── lib
+│   ├── database-schema
+│   └── queries
+├── package.json
+├── pages
+│   ├── api
+│   ├── app.tsx
+│   ├── login.tsx
+│   └── register.tsx
+├── public
+└── src
+    ├── assets
+    │   ├── icons
+    │   └── images
+    ├── components
+    │   ├── Banner.tsx
+    │   ├── CallToAction.tsx
+    │   ├── FAQs.tsx
+    │   ├── Feature.tsx
+    │   ├── Features.tsx
+    │   ├── Footer.tsx
+    │   ├── Hero.tsx
+    │   ├── LogoTicker.tsx
+    │   ├── Navbar.tsx
+    │   ├── ProductShowcase.tsx
+    │   ├── Project
+    │   └── ui
+    │       ├── Button.tsx
+    │       ├── Dialog.tsx
+    │       ├── Input.tsx
+    │       ├── Table.tsx
+    │       └── Tabs.tsx
+    └── types
+        └── project.tsx
+
+22 directories, 23 files
