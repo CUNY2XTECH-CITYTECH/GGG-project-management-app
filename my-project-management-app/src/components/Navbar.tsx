@@ -1,7 +1,13 @@
+'use client';
+
 import Image from 'next/image';
 import logoImage from '../assets/images/logosaas.png';
 import MenuIcon from '../assets/icons/menu.svg';
+import { useRouter } from 'next/navigation';
+
 export const Navbar = () => {
+  const router = useRouter();
+
   return (
     <div className="bg-black">
       <div className="px-4 ">
@@ -48,7 +54,10 @@ export const Navbar = () => {
             >
               Pricing
             </a>
-            <button className="bg-white py-2 px-4 rounded-lg">
+            <button
+              className="bg-white py-2 px-4 rounded-lg"
+              onClick={() => router.push('/register')}
+            >
               Create Account
             </button>
           </nav>
