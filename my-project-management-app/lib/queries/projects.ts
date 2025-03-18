@@ -3,7 +3,7 @@ import { projects } from '../database-schema/schema'; // Import the projects sch
 import { eq } from 'drizzle-orm/expressions'; // Import the eq function
 
 // Define the ProjectData interface
-interface ProjectData {
+export interface ProjectData {
     project_name: string; // Name of the project
     description?: string; // Optional description
     created_by: string; // UUID of the user creating the project
@@ -13,7 +13,7 @@ interface ProjectData {
 }
 
 // Get all projects
-const getAllProjects = async () => {
+export const getAllProjects = async () => {
     try {
         const projectList = await db.select().from(projects).execute();
         return projectList;
@@ -39,7 +39,7 @@ export const getProjectById = async (pid: number) => { // Ensure pid is of type 
 };
 
 // Create a new project
-const createProject = async (projectData: ProjectData) => {
+export const createProject = async (projectData: ProjectData) => {
     try {
         const project = await db.insert(projects).values(projectData);
         return project;
@@ -50,7 +50,7 @@ const createProject = async (projectData: ProjectData) => {
 }
 
 // Update an existing project
-const updateProject = async (projectId: number, projectData: ProjectData) => { // Ensure projectId is of type number
+export const updateProject = async (projectId: number, projectData: ProjectData) => { // Ensure projectId is of type number
     try {
         const updatedProject = await db
             .update(projects)
@@ -65,7 +65,7 @@ const updateProject = async (projectId: number, projectData: ProjectData) => { /
 };
 
 // Delete a project by project_id
-const deleteProject = async (projectId: number) => {
+export const deleteProject = async (projectId: number) => {
     try {
         await db.delete(projects).where(eq(projects.project_id, projectId)).execute();
     } catch (error) {
