@@ -35,11 +35,7 @@ export default function SignUpPage() {
     <div className="container">
       <h1>Sign-Up</h1>
       {error && <p className="error">{error}</p>}
-<<<<<<< HEAD
       <form onSubmit={(e) => handleSignUp(e as unknown as SubmitEvent)}>
-=======
-      <form onSubmit={handleSignUp}>
->>>>>>> 03c4383b4f11a5ec82a63b304bf944f80dc515fc
         <div>
           <label htmlFor="email">Email:</label>
           <input
