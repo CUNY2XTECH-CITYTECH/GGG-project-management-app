@@ -1,4 +1,4 @@
-import { createProject, getProjectById, updateProject, deleteProject, getAllProjects } from '../queries/projects';
+import { createProject, getProjectById, updateProject, deleteProject, getAllProjects, getProjectsByUser } from '../queries/projects';
 import { ProjectData } from '../queries/projects'; // Adjust the import based on your project structure
 
 // Create a new project
@@ -70,6 +70,15 @@ export const getAllProjectsController = async () => {
             due_date: project.due_date ?? undefined, // Convert null to undefined
             status: project.status ?? undefined, // Convert null to undefined
         }));
+        return { status: 200, data: projects };
+    } catch (error) {
+        return { status: 500, message: (error as Error).message }; // Handle errors
+    }
+};
+
+export const getProjectsByUserController = async (userId: string) => {
+    try {
+        const projects = await getProjectsByUser(userId);
         return { status: 200, data: projects };
     } catch (error) {
         return { status: 500, message: (error as Error).message }; // Handle errors
