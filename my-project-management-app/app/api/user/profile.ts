@@ -2,10 +2,10 @@ import { NextResponse, NextRequest } from 'next/server';
 import db from '../../../lib/db'; // Your Drizzle database configuration
 import { users } from '../../../lib/database-schema/schema'; // Assuming this is where your schema is defined
 import { ensureSuperTokensInit } from '../../config/backend'; // Assuming this ensures SuperTokens is initialized
-
+import { eq, ne, and } from 'drizzle-orm';
 ensureSuperTokensInit();
 
-export async function POST(request) {
+export async function POST(request: NextRequest) {
   const { full_name, email } = await request.json();
   
   const userId = request.headers.get('x-user-id'); // Get the user ID from the session
@@ -16,7 +16,7 @@ export async function POST(request) {
   }
 
   // Check if email already exists
-  const existingUser = await db.select().from(users).where(users.email.eq(email)).execute();
+  const existingUser = await db.select().from(users).where(eq(users.email, email)).execute();
   if (existingUser.length > 0) {
     return new NextResponse('Email is already taken', { status: 400 });
   }
@@ -35,7 +35,7 @@ export async function POST(request) {
     return new NextResponse('Error creating profile', { status: 500 });
   }
 }
-export async function GET(request) {
+export async function GET(request: NextRequest) {
     const userId = request.headers.get('x-user-id'); // Get the user ID from the session
     
     // Authentication check
@@ -45,7 +45,7 @@ export async function GET(request) {
   
     try {
       // Retrieve user profile from the database
-      const userProfile = await db.select().from(users).where(users.user_id.eq(userId)).execute();
+      const userProfile = await db.select().from(users).where(eq(users.user_id, userId)).execute();
   
       if (userProfile.length === 0) {
         return new NextResponse('Profile not found', { status: 404 });
@@ -58,7 +58,7 @@ export async function GET(request) {
     }
   }
 
-  export async function PUT(request) {
+  export async function PUT(request: NextRequest) {
     const { full_name, email } = await request.json();
     const userId = request.headers.get('x-user-id'); // Get the user ID from the session
     
@@ -68,14 +68,24 @@ export async function GET(request) {
     }
   
     // Check if the email already exists (ensure uniqueness)
-    const existingUser = await db.select().from(users).where(users.email.eq(email)).andWhere(users.user_id.notEq(userId)).execute();
-    if (existingUser.length > 0) {
-      return new NextResponse('Email is already taken', { status: 400 });
+    try {
+      const existingUser = await db
+        .select()
+        .from(users)
+        .where(and(eq(users.email, email), ne(users.user_id, userId)))
+        .execute();
+
+      if (existingUser.length > 0) {
+        return new NextResponse('Email is already taken', { status: 400 });
+      }
+    } catch (error) {
+      console.error('Error checking existing user:', error);
+      return new NextResponse('Internal server error', { status: 500 });
     }
-  
+    
     try {
       // Update the user profile in the database
-      await db.update(users).set({ full_name, email }).where(users.user_id.eq(userId)).execute();
+      await db.update(users).set({ full_name, email }).where(eq(users.user_id, userId)).execute();
   
       return new NextResponse('Profile updated successfully', { status: 200 });
     } catch (error) {
@@ -84,7 +94,7 @@ export async function GET(request) {
     }
   }
 
-  export async function DELETE(request) {
+  export async function DELETE(request: NextRequest) {
     const userId = request.headers.get('x-user-id'); // Get the user ID from the session
     
     // Authentication check
@@ -94,7 +104,7 @@ export async function GET(request) {
   
     try {
       // Optional: You may want to delete related records (tasks, attachments, messages) for referential integrity.
-      await db.delete().from(users).where(users.user_id.eq(userId)).execute();
+      await db.delete(users).where(eq(users.user_id, userId)).execute();
   
       return new NextResponse('Profile deleted successfully', { status: 200 });
     } catch (error) {
