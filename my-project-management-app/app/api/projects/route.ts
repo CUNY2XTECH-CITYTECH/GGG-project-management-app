@@ -9,9 +9,8 @@ export async function POST(request: Request) {
 export async function GET(request: Request) {
     const { searchParams } = new URL(request.url);
     const id = searchParams.get('id');
-
     if (id) {
-        return getProject(id);
+        return getProject(parseInt(id));
     } else {
         return getAllProjectsController();
     }
@@ -29,5 +28,5 @@ export async function DELETE(request: Request) {
     if (!id) {
         return NextResponse.json({ error: 'ID is required' }, { status: 400 });
     }
-    return deleteExistingProject(id);
+    return deleteExistingProject(parseInt(id));
 }
