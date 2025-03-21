@@ -12,9 +12,9 @@ export const createNewProject = async (projectId: string, projectName: string, d
 };
 
 // Get project by ID
-export const getProject = async (projectId: string) => {
+export const getProject = async (projectId: number) => {
     try {
-        const project = await getProjectById(parseInt(projectId));
+        const project = await getProjectById(projectId);
         if (!project) {
             return { status: 404, message: 'Project not found' }; // Handle not found
         }
@@ -48,9 +48,9 @@ export const updateExistingProject = async (projectId: string, projectName?: str
 };
 
 // Delete project
-export const deleteExistingProject = async (projectId: string) => {
+export const deleteExistingProject = async (projectId: number) => {
     try {
-        await deleteProject(parseInt(projectId));
+        await deleteProject(projectId);
         return { status: 204 }; // No content
     } catch (error) {
         return { status: 500, message: (error as Error).message }; // Handle errors

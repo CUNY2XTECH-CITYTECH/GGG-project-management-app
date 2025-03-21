@@ -5,7 +5,7 @@ import { eq } from 'drizzle-orm/expressions'; // Import the eq function
 // Define the TaskData interface
 interface TaskData {
     task_id: number; // Unique task ID
-    task_name: string; // Name of the task
+    task_name: string | ""; // Name of the task
     description?: string; // Optional description
     project_id: number; // ID of the project
     assigned_to?: string; // Optional assigned to
