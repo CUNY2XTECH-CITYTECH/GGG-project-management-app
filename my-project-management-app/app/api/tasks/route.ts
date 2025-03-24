@@ -3,7 +3,7 @@ import { createNewTask, getTask, updateExistingTask, deleteExistingTask, getAllT
 
 export async function POST(request: Request) {
     const body = await request.json();
-    return createNewTask(body.taskId, body.taskName, body.description, body.projectId, body.assignedTo);
+    return createNewTask(body.taskName, body.description, body.projectId, body.assignedTo);
 }
 
 export async function GET(request: Request) {
@@ -22,8 +22,7 @@ export async function GET(request: Request) {
 
 export async function PUT(request: Request) {
     const body = await request.json();
-    const id = body.id; // Assuming the ID is sent in the body
-    return updateExistingTask(id, body.taskName, body.description, body.projectId, body.assignedTo);
+    return updateExistingTask(body.id, body.taskName, body.description, body.projectId, body.assignedTo);
 }
 
 export async function DELETE(request: Request) {
