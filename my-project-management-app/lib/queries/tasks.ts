@@ -4,7 +4,6 @@ import { eq } from 'drizzle-orm/expressions'; // Import the eq function
 
 // Define the TaskData interface
 interface TaskData {
-    task_id: number; // Unique task ID
     task_name: string | ""; // Name of the task
     description?: string; // Optional description
     project_id: number; // ID of the project
@@ -15,9 +14,9 @@ interface TaskData {
 }
 
 // Get all tasks
-export const getAllTasks = async () => {
+export const getAllTasks = async (projectId: number) => {
     try {
-        const taskList = await db.select().from(tasks).execute();
+        const taskList = await db.select().from(tasks).where(eq(tasks.project_id, projectId)).execute();
         return taskList;
     } catch (error) {
         console.error('Error fetching tasks:', error);

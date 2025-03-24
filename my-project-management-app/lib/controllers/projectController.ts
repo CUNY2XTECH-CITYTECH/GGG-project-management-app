@@ -2,7 +2,7 @@ import { createProject, getProjectById, updateProject, deleteProject, getAllProj
 import { ProjectData } from '../queries/projects'; // Adjust the import based on your project structure
 
 // Create a new project
-export const createNewProject = async (projectId: string, projectName: string, description: string, createdBy: string) => {
+export const createNewProject = async (projectName: string, description: string, createdBy: string) => {
     try {
         const project = await createProject({ project_name: projectName, description, created_by: createdBy });
         return { status: 201, data: project }; // Return status and project data
