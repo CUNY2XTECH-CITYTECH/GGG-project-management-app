@@ -68,9 +68,11 @@ export const Hero = () => {
           </p>
         </div>
         <div className="flex items-center justify-center gap-4 mt-8">
-          <button className="bg-white text-black py-3 px-5 rounded-lg font-medium">
-            Get Started for Free
-          </button>
+          <a href="/signin">
+            <button className="bg-white text-black py-3 px-5 rounded-lg font-medium">
+              Get Started for Free
+            </button>
+          </a>
         </div>
       </div>
     </div>
