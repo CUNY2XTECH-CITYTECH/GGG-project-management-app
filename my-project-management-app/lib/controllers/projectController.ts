@@ -1,8 +1,8 @@
-import { createProject, getProjectById, updateProject, deleteProject, getAllProjects } from '../queries/projects';
+import { createProject, getProjectById, updateProject, deleteProject, getAllProjects, getProjectsByUser } from '../queries/projects';
 import { ProjectData } from '../queries/projects'; // Adjust the import based on your project structure
 
 // Create a new project
-export const createNewProject = async (projectId: string, projectName: string, description: string, createdBy: string) => {
+export const createNewProject = async (projectName: string, description: string, createdBy: string) => {
     try {
         const project = await createProject({ project_name: projectName, description, created_by: createdBy });
         return { status: 201, data: project }; // Return status and project data
@@ -12,9 +12,9 @@ export const createNewProject = async (projectId: string, projectName: string, d
 };
 
 // Get project by ID
-export const getProject = async (projectId: string) => {
+export const getProject = async (projectId: number) => {
     try {
-        const project = await getProjectById(parseInt(projectId));
+        const project = await getProjectById(projectId);
         if (!project) {
             return { status: 404, message: 'Project not found' }; // Handle not found
         }
@@ -48,9 +48,9 @@ export const updateExistingProject = async (projectId: string, projectName?: str
 };
 
 // Delete project
-export const deleteExistingProject = async (projectId: string) => {
+export const deleteExistingProject = async (projectId: number) => {
     try {
-        await deleteProject(parseInt(projectId));
+        await deleteProject(projectId);
         return { status: 204 }; // No content
     } catch (error) {
         return { status: 500, message: (error as Error).message }; // Handle errors
@@ -70,6 +70,15 @@ export const getAllProjectsController = async () => {
             due_date: project.due_date ?? undefined, // Convert null to undefined
             status: project.status ?? undefined, // Convert null to undefined
         }));
+        return { status: 200, data: projects };
+    } catch (error) {
+        return { status: 500, message: (error as Error).message }; // Handle errors
+    }
+};
+
+export const getProjectsByUserController = async (userId: string) => {
+    try {
+        const projects = await getProjectsByUser(userId);
         return { status: 200, data: projects };
     } catch (error) {
         return { status: 500, message: (error as Error).message }; // Handle errors

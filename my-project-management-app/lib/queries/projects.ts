@@ -38,6 +38,28 @@ export const getProjectById = async (pid: number) => { // Ensure pid is of type 
     }
 };
 
+// Get projects grouped by status for a specific user
+export const getProjectsByUser = async (userId: string) => {
+    try {
+        const userProjects = await db
+            .select()
+            .from(projects)
+            .where(eq(projects.created_by, userId))
+            .execute();
+
+        const groupedProjects = {
+            "to-do": userProjects.filter((p) => p.status === "to-do"),
+            "in-progress": userProjects.filter((p) => p.status === "in-progress"),
+            "done": userProjects.filter((p) => p.status === "done"),
+        };
+
+        return groupedProjects;
+    } catch (error) {
+        console.error("Error fetching projects by user:", error);
+        throw new Error("Could not retrieve projects for the user.");
+    }
+};
+
 // Create a new project
 export const createProject = async (projectData: ProjectData) => {
     try {

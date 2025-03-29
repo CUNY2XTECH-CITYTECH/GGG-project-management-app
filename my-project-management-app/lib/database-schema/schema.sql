@@ -31,7 +31,7 @@ CREATE TABLE projects (
     created_by UUID NOT NULL,          -- Foreign key to users table (UUID from SuperTokens)
     start_date DATE,                   -- Start date of the project
     due_date DATE,                     -- Due date of the project
-    status VARCHAR(50) DEFAULT 'active' -- Status (e.g., active, completed, on hold)
+    status VARCHAR(50) DEFAULT 'to-do' -- Status (e.g., to-do, in progress, done)
 );
 -- Tasks Table
 CREATE TABLE tasks (
@@ -42,7 +42,7 @@ CREATE TABLE tasks (
     assigned_to UUID,                  -- Foreign key to users table (UUID from SuperTokens)
     priority VARCHAR(50) DEFAULT 'medium', -- Priority of the task (e.g., low, medium, high)
     due_date DATE,                     -- Due date for the task
-    status VARCHAR(50) DEFAULT 'pending' -- Task status (e.g., pending, in progress, completed)
+    status VARCHAR(50) DEFAULT 'to-do' -- Task status (e.g., to-do, in progress, done)
 );
 
 -- Attachments Table (to store file attachments for tasks)
