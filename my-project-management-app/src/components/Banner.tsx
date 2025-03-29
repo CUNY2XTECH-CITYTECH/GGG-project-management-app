@@ -6,7 +6,7 @@ export const Banner = () => {
           <span className="hidden sm:inline">
             Introducing Your Ultimate Project Management Tool -{' '}
           </span>
-          <a href="#" className="underline underline-offset-4">
+          <a href="/signin" className="underline underline-offset-4">
             Get Started Now
           </a>
         </p>

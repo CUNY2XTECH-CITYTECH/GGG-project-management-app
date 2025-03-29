@@ -28,7 +28,7 @@ export const CallToAction = () => {
           <Image
             src={helixImage}
             alt=""
-            className="absolute top-6 left-[calc(100%+36px)]"
+            className="absolute top-6 left-[calc(100%+36px)] hidden sm:block"
           />
         </motion.div>
         <motion.div style={{ translateY }}>
